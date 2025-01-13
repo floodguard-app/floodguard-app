@@ -1,18 +1,27 @@
 import { createStackNavigator } from '@react-navigation/stack'
 import { Configs } from '../screens/Configs';
+// import { RegisterUser } from '../screens/RegisterUser';
+
+export type StackParamList = {
+    'Configurations Screen': undefined; // Nenhum parâmetro
+    'Register User Screen': undefined; // Nenhum parâmetro
+    [key: string]: any; // Aceita outras rotas dinâmicas
+};
 
 // Import Screens
 
-const { Navigator, Screen } = createStackNavigator();
+const { Navigator, Screen } = createStackNavigator<StackParamList>();
 
 interface NavigationPattern {
-    name: string;
+    name: keyof StackParamList;
     component: any;
 }
 
 interface StackTabsRoutesProps {
     otherNavigationPatterns?: Array<NavigationPattern>;
 }
+
+
 
 export default function StackTabsRoutes({ otherNavigationPatterns }:StackTabsRoutesProps) {
     return (
@@ -21,7 +30,7 @@ export default function StackTabsRoutes({ otherNavigationPatterns }:StackTabsRou
             { otherNavigationPatterns?.map(pattern => 
                 <Screen 
                     key={pattern.name}
-                    name={pattern.name}
+                    name={pattern.name as keyof StackParamList}
                     component={pattern.component}
                     options={{
                         headerShown: false,
@@ -31,6 +40,7 @@ export default function StackTabsRoutes({ otherNavigationPatterns }:StackTabsRou
 
 
             {/* Stack navigation pattern */}
+
             <Screen 
                 name='Configurations Screen'
                 component={Configs}
@@ -39,6 +49,15 @@ export default function StackTabsRoutes({ otherNavigationPatterns }:StackTabsRou
                     headerShown: true,
                 }}
             />
+
+            {/* <Screen 
+                name='Register User Screen'
+                component={RegisterUser}
+                options={{
+                    title: 'Register User',
+                    headerShown: false,
+                }}
+            /> */}
         </Navigator>
     )
 }

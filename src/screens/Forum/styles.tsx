@@ -5,5 +5,12 @@ export const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        paddingHorizontal: 25,
+        paddingTop: 100,
+        
+    },
+    flatList: {
+        flex: 1,
+        width: '100%',
     }
 });

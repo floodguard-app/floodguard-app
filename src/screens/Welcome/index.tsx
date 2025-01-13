@@ -1,17 +1,21 @@
 import React, { useRef, useState } from 'react';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { StackParamList } from '../../routes/stack-tabs.routes';
 import { Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
 import PagerView from 'react-native-pager-view';
-
-import logo from '../../../assets/logo.png'
+import logo from '../../../assets/images/logo.png';
 
 import { styles } from './styles';
 
-interface WelcomeScreenProps {
-    onComplete: () => void; 
-} 
+// interface WelcomeScreenProps {
+//     onComplete: () => void; 
+// } 
 
-export function Welcome({ onComplete }: WelcomeScreenProps) {
+export default function Welcome(
+    // { onComplete }: WelcomeScreenProps
+    ) {
 
+    const navigation = useNavigation<NavigationProp<StackParamList>>();
     const [currentScreen, setCurrentScreen] = useState(0);
     const pagerRef = useRef<PagerView>(null);
 
@@ -35,7 +39,8 @@ export function Welcome({ onComplete }: WelcomeScreenProps) {
             pagerRef.current?.setPage(currentScreen + 1)
         } 
         else {
-            onComplete(); // Finaliza a tela de boas vindas
+            // onComplete(); // Finaliza a tela de boas vindas
+            navigation.navigate('Register User Screen'); // Direciona para a página de registro
         }
     };
 

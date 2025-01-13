@@ -6,12 +6,12 @@ import StackTabsRoutes from './stack-tabs.routes'
 
 export function Routes() {
     return (
-        <NavigationContainer>
+        // <NavigationContainer>
             <StackTabsRoutes 
                 otherNavigationPatterns={[
                     { name: 'bottom-tab-pattern', component: BottomTabsRoutes }
                 ]}
             />
-        </NavigationContainer>
+        // </NavigationContainer>
     )
 }
