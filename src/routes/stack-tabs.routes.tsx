@@ -1,5 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack'
 import { Configs } from '../screens/Configs';
+import { WriteComment } from '../screens/WriteComment';
 // import { RegisterUser } from '../screens/RegisterUser';
 
 export type StackParamList = {
@@ -45,19 +46,25 @@ export default function StackTabsRoutes({ otherNavigationPatterns }:StackTabsRou
                 name='Configurations Screen'
                 component={Configs}
                 options={{
-                    title: 'Configurations',
+                    title: '',
                     headerShown: true,
+                    headerStyle: {
+                        backgroundColor: '#f2f2f2',
+                    },
                 }}
             />
 
-            {/* <Screen 
-                name='Register User Screen'
-                component={RegisterUser}
+            <Screen 
+                name='Write Comment Screen'
+                component={WriteComment}
                 options={{
-                    title: 'Register User',
-                    headerShown: false,
+                    title: '',
+                    headerShown: true,
+                    headerStyle: {
+                        backgroundColor: '#f2f2f2',
+                    },
                 }}
-            /> */}
+            />
         </Navigator>
     )
 }
