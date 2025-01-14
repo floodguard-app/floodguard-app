@@ -6,10 +6,18 @@ import PasswordInput from "./PasswordInput"; // Importe o componente
 import { styles } from "./styles";
 
 interface RegisterUserProps {
-    onComplete: () => void,
+    navigation: any;
+    route: {
+        params: {
+            onComplete: () => void;
+        };
+    };
 }
 
-export default function RegisterUser({ onComplete }: RegisterUserProps) {
+export function RegisterUser({ navigation, route }: RegisterUserProps) {
+
+    const { onComplete } = route.params;
+    
     return (
         <PagerView 
             style={styles.pagerView} 
@@ -18,12 +26,12 @@ export default function RegisterUser({ onComplete }: RegisterUserProps) {
         >
             {/* Tela de Email */}
             <View key="1" style={styles.page}>
-                <EmailInput />
+                <EmailInput navigation={navigation}/>
             </View>
 
             {/* Tela de Senha */}
             <View key="2" style={styles.page}>
-                <PasswordInput onComplete={onComplete}/>
+                <PasswordInput navigation={navigation} onComplete={onComplete}/>
             </View>
         </PagerView>
     );

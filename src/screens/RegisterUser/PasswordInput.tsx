@@ -5,16 +5,21 @@ import { styles } from "./styles";
 import { useState } from "react";
 
 interface PasswordInputProps {
+    navigation: any,
     onComplete: () => void,
 }
 
-export default function PasswordInput({ onComplete }: PasswordInputProps) {
+export default function PasswordInput({ navigation, onComplete }: PasswordInputProps) {
 
     const [userPassword, setUserPassword] = useState<string>('')
     const [isSecure, setIsSecure] = useState(true);
 
+    const navToLogin = () => {
+        navigation.navigate('Login Screen');
+    }
+
     return (
-        <LinearGradient colors={['#66B1F2', '#4B64F2', '#5079F2', '#5E9FF2']} style={styles.container}>
+        <LinearGradient colors={['#5E9FF2', '#4B64F2', '#5079F2', '#66B1F2']} style={styles.container}>
             <Text style={styles.title}>{'Digite \nsua \nSenha'}</Text>
             <View style={styles.passwordArea}>
                 <TextInput style={styles.passwordInput}
@@ -31,7 +36,9 @@ export default function PasswordInput({ onComplete }: PasswordInputProps) {
                     <Ionicons name="eye-off-outline" size={30} color='#5079F2'/>}
                 </Text>
             </View>
-            <Text style={styles.hasRegister}>Já tenho um cadastro</Text>
+            <Text style={styles.hasRegister}
+                onPress={navToLogin}
+            >Já tenho um cadastro</Text>
         </LinearGradient>
     )
 }

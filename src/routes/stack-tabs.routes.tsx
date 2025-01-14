@@ -1,12 +1,15 @@
 import { createStackNavigator } from '@react-navigation/stack'
+import { RegisterUser } from '../screens/RegisterUser';
+import { Credentials } from '../screens/Login/Credentials';
 import { Configs } from '../screens/Configs';
 import { WriteComment } from '../screens/WriteComment';
-// import { RegisterUser } from '../screens/RegisterUser';
+import BottomTabsRoutes from './bottom-tabs.routes';
+
 
 export type StackParamList = {
-    'Configurations Screen': undefined; // Nenhum parâmetro
-    'Register User Screen': undefined; // Nenhum parâmetro
-    [key: string]: any; // Aceita outras rotas dinâmicas
+    'Configurations Screen': undefined; 
+    'Register User Screen': { onComplete: () => void }; // Parâmetro esperado
+    [key: string]: any; 
 };
 
 // Import Screens
@@ -24,23 +27,28 @@ interface StackTabsRoutesProps {
 
 
 
-export default function StackTabsRoutes({ otherNavigationPatterns }:StackTabsRoutesProps) {
+export default function StackTabsRoutes(
+    // { otherNavigationPatterns }:StackTabsRoutesProps
+) {
     return (
-        <Navigator>
-            {/* Outros padrões de navegação */}
-            { otherNavigationPatterns?.map(pattern => 
-                <Screen 
-                    key={pattern.name}
-                    name={pattern.name as keyof StackParamList}
-                    component={pattern.component}
-                    options={{
-                        headerShown: false,
-                    }}
-                />
-            ) }
+        <Navigator initialRouteName='Register User Screen'>
 
+            <Screen 
+                name='Register User Screen'
+                component={RegisterUser}
+                initialParams={{ onComplete: () => {} }}
+                options={{
+                    headerShown: false,
+                }}
+            />
 
-            {/* Stack navigation pattern */}
+            <Screen 
+                name='Login Screen'
+                component={Credentials}
+                options={{
+                    headerShown: false,
+                }}
+            />
 
             <Screen 
                 name='Configurations Screen'
@@ -63,6 +71,14 @@ export default function StackTabsRoutes({ otherNavigationPatterns }:StackTabsRou
                     headerStyle: {
                         backgroundColor: '#f2f2f2',
                     },
+                }}
+            />
+
+            <Screen 
+                name="Main Tabs"
+                component={BottomTabsRoutes}
+                options={{
+                    headerShown: false,
                 }}
             />
         </Navigator>

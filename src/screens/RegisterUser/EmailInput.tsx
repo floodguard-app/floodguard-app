@@ -3,9 +3,13 @@ import { styles } from "./styles"
 import { Text, TextInput } from "react-native"
 import { useState } from "react"
 
-export default function EmailInput() {
+export default function EmailInput({ navigation }: any) {
     
     const [userEmail, setUserEmail] = useState<string>('')
+
+    const navToLogin = () => {
+        navigation.navigate('Login Screen');
+    }
 
     return (
         <LinearGradient colors={['#66B1F2', '#4B64F2', '#5079F2', '#5E9FF2']} style={styles.container}>
@@ -16,8 +20,9 @@ export default function EmailInput() {
                 value={userEmail}
                 onChangeText={setUserEmail}
             />
-            <Text style={styles.hasRegister}>Já tenho um cadastro</Text>
-            <Text style={styles.hasRegister}>{userEmail}</Text>
+            <Text style={styles.hasRegister}
+                onPress={navToLogin}
+            >Já tenho um cadastro</Text>
         </LinearGradient>
     )
 }

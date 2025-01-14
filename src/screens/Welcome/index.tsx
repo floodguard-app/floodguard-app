@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { StackParamList } from '../../routes/stack-tabs.routes';
 import { Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
@@ -7,15 +7,13 @@ import logo from '../../../assets/images/logo.png';
 
 import { styles } from './styles';
 
-// interface WelcomeScreenProps {
-//     onComplete: () => void; 
-// } 
+interface WelcomeScreenProps {
+    onComplete: () => void; 
+} 
 
-export default function Welcome(
-    // { onComplete }: WelcomeScreenProps
-    ) {
+export default function Welcome({ onComplete }: WelcomeScreenProps ) {
 
-    const navigation = useNavigation<NavigationProp<StackParamList>>();
+    // const navigation = useNavigation<NavigationProp<StackParamList>>();
     const [currentScreen, setCurrentScreen] = useState(0);
     const pagerRef = useRef<PagerView>(null);
 
@@ -39,8 +37,7 @@ export default function Welcome(
             pagerRef.current?.setPage(currentScreen + 1)
         } 
         else {
-            // onComplete(); // Finaliza a tela de boas vindas
-            navigation.navigate('Register User Screen'); // Direciona para a página de registro
+            onComplete(); // Finaliza a tela de boas vindas
         }
     };
 
@@ -78,27 +75,31 @@ export default function Welcome(
                 ) }
 
                 {/* Indicadores (bolinhas) */}
-                <FlatList 
+                <FlatList
                     data={screens}
                     keyExtractor={(_, index) => index.toString()}
                     horizontal
-                    contentContainerStyle={styles.indicatorContainer}
+                    contentContainerStyle={[
+                        styles.indicatorContainer,
+                        { opacity: currentScreen >= 0 ? 1 : 0 }, // Força re-render
+                    ]}
                     renderItem={({ index }) => (
                         <View style={styles.indicatorItem}>
-                        <TouchableOpacity 
-                            style={[
-                                styles.indicator,
-                                index === currentScreen && styles.currentIndicator,
-                                index <= currentScreen && styles.coloredIndicator,
-                            ]}
-                            onPress={() => pagerRef.current?.setPage(index)}
-                        />
-                        { index < screens.length - 1 && index < currentScreen && (
-                            <View style={styles.indicatorsLink} />
-                        ) }
+                            <TouchableOpacity
+                                style={[
+                                    styles.indicator,
+                                    index === currentScreen && styles.currentIndicator,
+                                    index <= currentScreen && styles.coloredIndicator,
+                                ]}
+                                onPress={() => pagerRef.current?.setPage(index)}
+                            />
+                            {index < screens.length - 1 && index < currentScreen && (
+                                <View style={styles.indicatorsLink} />
+                            )}
                         </View>
                     )}
                 />
+                <Text>{currentScreen}</Text>
             </View>
         </View>
     );

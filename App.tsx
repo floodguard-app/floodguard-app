@@ -19,22 +19,21 @@ export default function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   const checkFirstLaunch = async () => {
-  //     const hasLaunched = await AsyncStorage.getItem('hasLaunched');
-  //     if(hasLaunched === null) {
-  //       // Primeira vez abrindo o app
-  //       await AsyncStorage.setItem('hasLaunched', 'true');
-  //       setIsFirstLaunch(true);
-  //     }
-  //     else {
-  //       setIsFirstLaunch(false);
-  //     }
-  //   }
-  //   checkFirstLaunch();
+    const checkFirstLaunch = async () => {
+      const hasLaunched = await AsyncStorage.getItem('hasLaunched');
+      if(hasLaunched === null) {
+        // Primeira vez abrindo o app
+        setIsFirstLaunch(true);
+      }
+      else {
+        setIsFirstLaunch(false);
+      }
+    }
+    checkFirstLaunch();
 
-  // }, [])
+  }, [])
 
   if(isFirstLaunch === null) return null; // AppLoading
 
@@ -42,14 +41,18 @@ export default function App() {
     <NavigationContainer>
       <StatusBar style="dark" />
       { isFirstLaunch ? (
-        <WelcomeTabsRoutes onComplete={() => setIsFirstLaunch(false)} />
+        <Welcome onComplete={async () => {
+          setIsFirstLaunch(false);
+          await AsyncStorage.setItem('hasLaunched', 'true');
+        }} />
       ) 
-      : isLoggedIn ? (
-          <Routes />
-        ) 
-        : (
-          <Credentials setIsLoggedIn={setIsLoggedIn}/>
-        ) 
+      : <Routes/>
+      // : isLoggedIn ? (
+      //     <Routes />
+      //   ) 
+      //   : (
+      //     <Credentials setIsLoggedIn={setIsLoggedIn}/>
+      //   ) 
        }
     </NavigationContainer>
   );

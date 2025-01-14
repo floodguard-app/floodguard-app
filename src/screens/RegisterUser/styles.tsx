@@ -3,14 +3,17 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
     pagerView: {
         flex: 1,
+        width: '100%',
     },
     page: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        padding: 20,
+        width: '100%',
+        backgroundColor: 'green',
     },
     container: {
+        width: '100%',
         flex: 1,
         justifyContent: 'flex-start',
         paddingHorizontal: 40,
