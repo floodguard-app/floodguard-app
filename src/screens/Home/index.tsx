@@ -26,14 +26,14 @@ export function Home({ navigation }: any) {
 
   return (
     <View style={styles.container}>
-    <HeaderButtons navigation={navigation} />
-    <FlatList 
-        style={styles.flatList}
-        contentContainerStyle={{ alignItems: 'center', justifyContent: 'flex-start' }}
-        data={floodAlertList}
-        renderItem={({ item }) => <FloodAlert alert={item} />}
-        keyExtractor={item => item.id} 
-    />
+        <HeaderButtons navigation={navigation} />
+        <FlatList 
+            style={styles.flatList}
+            contentContainerStyle={{ alignItems: 'center', justifyContent: 'flex-start' }}
+            data={floodAlertList}
+            renderItem={({ item }) => <FloodAlert alert={item} />}
+            keyExtractor={item => item.id} 
+        />
     </View>
   );
 }

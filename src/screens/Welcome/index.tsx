@@ -99,7 +99,6 @@ export default function Welcome({ onComplete }: WelcomeScreenProps ) {
                         </View>
                     )}
                 />
-                <Text>{currentScreen}</Text>
             </View>
         </View>
     );
