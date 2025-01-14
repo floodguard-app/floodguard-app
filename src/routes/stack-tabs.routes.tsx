@@ -4,6 +4,7 @@ import { Credentials } from '../screens/Login/Credentials';
 import { Configs } from '../screens/Configs';
 import { WriteComment } from '../screens/WriteComment';
 import BottomTabsRoutes from './bottom-tabs.routes';
+import { RecoverPassword } from '../screens/Login/RecoverPassword';
 
 
 export type StackParamList = {
@@ -45,6 +46,14 @@ export default function StackTabsRoutes(
             <Screen 
                 name='Login Screen'
                 component={Credentials}
+                options={{
+                    headerShown: false,
+                }}
+            />
+
+            <Screen
+                name='Recover Password Screen'
+                component={RecoverPassword}
                 options={{
                     headerShown: false,
                 }}

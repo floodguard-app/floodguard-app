@@ -8,9 +8,9 @@ export function Routes() {
     return (
         // <NavigationContainer>
             <StackTabsRoutes 
-                otherNavigationPatterns={[
-                    { name: 'bottom-tab-pattern', component: BottomTabsRoutes }
-                ]}
+                // otherNavigationPatterns={[
+                //     { name: 'bottom-tab-pattern', component: BottomTabsRoutes }
+                // ]}
             />
         // </NavigationContainer>
     )

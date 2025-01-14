@@ -6,12 +6,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 
-import { WelcomeTabsRoutes } from './src/routes/welcome-tabs.routes';
 import { Routes } from "./src/routes";
 import Welcome from './src/screens/Welcome';
 import { Credentials } from './src/screens/Login/Credentials';
-
-
 
 export default function App() {
 
@@ -47,13 +44,7 @@ export default function App() {
         }} />
       ) 
       : <Routes/>
-      // : isLoggedIn ? (
-      //     <Routes />
-      //   ) 
-      //   : (
-      //     <Credentials setIsLoggedIn={setIsLoggedIn}/>
-      //   ) 
-       }
+      }
     </NavigationContainer>
   );
 }

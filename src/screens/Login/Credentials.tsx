@@ -30,6 +30,10 @@ export function Credentials(
             })
         );
     };
+
+    const navToRecoverPassword = () => {
+        navigation.navigate('Recover Password Screen');
+    }
     
     return (
         <View style={styles.container}>
@@ -60,7 +64,9 @@ export function Credentials(
             >
                 <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Entrar</Text>
             </View>
-            <Text style={styles.forgotPassword}>Esqueci minha senha</Text>
+            <Text style={styles.forgotPassword}
+                onPress={navToRecoverPassword}
+            >Esqueci minha senha</Text>
         </View>
     );
 }

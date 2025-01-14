@@ -66,5 +66,29 @@ export const styles = StyleSheet.create({
         fontWeight: '600',
         textDecorationLine: 'underline',
         color: '#6874E8',
+    },
+    recoverPasswordContainter: {
+        backgroundColor: '#f6f7f8',
+        flex: 1,
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        paddingTop: '15%',
+    },
+    recoverPasswordImage: {
+        width: '80%',
+        maxHeight: '45%',
+    },
+    recoverPasswordField: {
+        marginHorizontal: '10%'
+    },
+    recoverPasswordButton: {
+        backgroundColor: '#6874e8',
+        marginTop: 25,
+        width: '80%',
+        height: 60,
+        borderRadius: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center',
     }
 });
