@@ -1,5 +1,5 @@
 import { LinearGradient } from "expo-linear-gradient";
-import { Button, Text, TextInput, View } from "react-native";
+import { Text, TextInput, View } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 import { styles } from "./styles";
 import { useState } from "react";

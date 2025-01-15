@@ -8,7 +8,7 @@ import { Map } from '../screens/Map';
 
 const { Navigator, Screen } = createBottomTabNavigator()
 
-export default function BottomTabsRoutes() {
+export default function MainRoutes() {
     return (
         <Navigator
             screenOptions={{

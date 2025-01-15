@@ -15,11 +15,11 @@ export function Configs({ navigation }: any) {
                 index: 0,
                 routes: [{ name: 'Login Screen' }],
             })
-        );        
+        ); 
     }
 
     const renderConfigItem = (icon:any, text:String, toPageName:String) => 
-        <View style={styles.configItem} onTouchEnd={() => navigation.navigate(toPageName)}>
+        <View style={styles.configItem} onTouchEnd={() => navigation.navigate('Configurations Tabs', {screen: toPageName})}>
             <View style={styles.configIconContainer}>
                 <Image source={icon} style={styles.configIcon} resizeMode='contain' />
             </View>
@@ -28,13 +28,13 @@ export function Configs({ navigation }: any) {
 
     return (
         <View style={styles.container}>
-            { renderConfigItem( personalInfoIcon, "Informação Pessoal", 'personalInfoIcon' )}
+            { renderConfigItem( personalInfoIcon, "Informação Pessoal", 'Profile Screen' )}
             <View style={styles.divider} />
-            { renderConfigItem( alertConfigIcon, "Configurar Alertas", '') }
+            { renderConfigItem( alertConfigIcon, "Configurar Alertas", 'Alert Configurations Screen') }
             <View style={styles.divider} />
-            { renderConfigItem( reportIcon, "Denunciar Abuso", '')}
+            { renderConfigItem( reportIcon, "Denunciar Abuso", 'Report Abuse Screen')}
             <View style={styles.divider} />
-            { renderConfigItem(talkToUsIcon, "Fale Conosco", '') }
+            { renderConfigItem(talkToUsIcon, "Fale Conosco", 'Talk to Us Screen') }
             <Text style={styles.endSession}
                 onPress={navToLogin}
             >Encerrar Sessão</Text>

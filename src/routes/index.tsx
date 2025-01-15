@@ -1,8 +1,8 @@
 import { NavigationContainer } from '@react-navigation/native'
 
 // Padrões de navegação
-import BottomTabsRoutes from './bottom-tabs.routes'
-import StackTabsRoutes from './stack-tabs.routes'
+import BottomTabsRoutes from './Main.routes'
+import StackTabsRoutes from './Stack.routes'
 
 export function Routes() {
     return (
