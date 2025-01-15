@@ -6,7 +6,7 @@ import writeIcon from '../../../assets/images/write.png';
 export function WriteCommentButton({ navigation }: any) {
 
     const navToWriteComment = () => {
-        navigation.navigate('Write Comment Screen')
+        navigation.navigate('Secondary Tabs', { screen: 'Write Comment Screen' })
     }
 
     return (

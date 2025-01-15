@@ -6,20 +6,22 @@ import configIcon from '../../../assets/images/config.png';
 
 export function HeaderButtons({ navigation }: any) {
 
+    const navToProfile = () => {
+        navigation.navigate('Configurations Tabs', { screen: 'Profile Screen' });
+    }
+
     const navToConfig = () => {
-        navigation.navigate('Configurations Screen')
+        navigation.navigate('Secondary Tabs', { screen: 'Configurations Screen' });
     }
     
     return (
         <View style={styles.container}>
-            <View style={[styles.profile, styles.button]}>
+            <View style={[styles.profile, styles.button]} onTouchEnd={navToProfile} >
                 <Image source={profileIcon} 
                     style={[styles.buttonIcon ]}
                 />
             </View>
-            <View style={[styles.config, styles.button]} 
-                onTouchEnd={navToConfig}
-            >
+            <View style={[styles.config, styles.button]} onTouchEnd={navToConfig} >
                 <Image source={configIcon}
                     style={[styles.buttonIcon]} 
                 />

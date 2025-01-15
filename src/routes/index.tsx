@@ -1,17 +1,39 @@
-import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import MainRoutes from './Main.routes';
+import ConfigRoutes from './Config.routes';
+import SecondaryRoutes from './Secondary.routes';
+import AuthRoutes from './Auth.routes';
 
-// Padrões de navegação
-import BottomTabsRoutes from './Main.routes'
-import StackTabsRoutes from './Stack.routes'
+const { Navigator, Screen } = createStackNavigator();
 
 export function Routes() {
     return (
-        // <NavigationContainer>
-            <StackTabsRoutes 
-                // otherNavigationPatterns={[
-                //     { name: 'bottom-tab-pattern', component: BottomTabsRoutes }
-                // ]}
+        <Navigator
+            initialRouteName="Authentication Tabs"
+            screenOptions={{
+                headerShown: false,
+            }}
+        >
+            <Screen 
+                name="Main Tabs"
+                component={MainRoutes}
             />
-        // </NavigationContainer>
+
+            <Screen 
+                name="Secondary Tabs"
+                component={SecondaryRoutes}
+            />
+
+            <Screen
+                name="Configurations Tabs"
+                component={ConfigRoutes}
+            />
+
+            <Screen 
+                name="Authentication Tabs"
+                component={AuthRoutes}
+            />
+
+        </Navigator>
     )
 }

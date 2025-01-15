@@ -13,10 +13,17 @@ export function Configs({ navigation }: any) {
         navigation.dispatch(
             CommonActions.reset({
                 index: 0,
-                routes: [{ name: 'Login Screen' }],
+                routes: [
+                    {
+                        name: 'Authentication Tabs', // Nome do Navigator pai
+                        state: {
+                            routes: [{ name: 'Login Screen' }], // Nome da tela no Navigator filho
+                        },
+                    },
+                ],
             })
-        ); 
-    }
+        );
+    };    
 
     const renderConfigItem = (icon:any, text:String, toPageName:String) => 
         <View style={styles.configItem} onTouchEnd={() => navigation.navigate('Configurations Tabs', {screen: toPageName})}>
