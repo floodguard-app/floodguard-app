@@ -1,0 +1,11 @@
+[
+    {
+        "id": 1,
+        "email": "floodguard@fakemail.com",
+        "password": "!@#$%",
+        "name": "Floodguard Test User",
+        "username": "Floody12",
+        "birthday": "12/10/2004",
+        "region": "Pirituba, SP"
+    }
+]

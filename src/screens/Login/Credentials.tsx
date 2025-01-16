@@ -1,21 +1,26 @@
-import React from 'react';
-import { Image, Text, TextInput, View } from 'react-native';
+import React, { useState } from 'react';
+import { Image, Text, TextInput, View, Alert } from 'react-native';
 import { CommonActions } from '@react-navigation/native';
 import logo from '../../../assets/images/logo.png';
 import emailIcon from '../../../assets/images/email.png';
 import paasswordIcon from '../../../assets/images/password.png';
 import { styles } from './styles';
+import loginUser from '../../services/users';
 
-interface CredentialScreenProps {
-    setIsLoggedIn: (arg0: boolean) => void;
-}
+export function Credentials({ navigation }: any ) {
+    
+    const [credentials, setCredentials] = useState({
+        email: '',
+        password: '',
+    })
 
-export function Credentials(
-    // { setIsLoggedIn }: CredentialScreenProps 
-    { navigation }: any
-) {
+    const navToHome = async () => {
+        const response = await loginUser(credentials.email, credentials.password);
+        if(!response) {
+            Alert.alert("Erro ao realizar login", "Email ou senha incorretos");
+            return;
+        }
 
-    const navToHome = () => {
         navigation.dispatch(
             CommonActions.reset({
                 index: 0,
@@ -44,7 +49,8 @@ export function Credentials(
                         <Image source={emailIcon} style={styles.inputIcon} />
                     </View>
                     <TextInput style={styles.credentialInput}
-                        placeholder='E-mail'
+                        placeholder='E-mail' autoCapitalize='none'
+                        onChangeText={(text) => setCredentials(prev => { return { ...prev, email: text }})}
                     />
                 </View> 
                 <View style={styles.credentialField}>
@@ -52,15 +58,13 @@ export function Credentials(
                         <Image source={paasswordIcon} style={styles.inputIcon} />
                     </View>
                     <TextInput style={styles.credentialInput}
-                        placeholder='Senha'
+                        placeholder='Senha' secureTextEntry={true}
+                        onChangeText={(text) => setCredentials(prev => { return { ...prev, password: text }})}
                     />
                 </View>
             </View>
             <View style={styles.loginButton} 
-                onTouchEnd={
-                    // () => setIsLoggedIn(true)
-                    navToHome
-                }
+                onTouchEnd={ navToHome }
             >
                 <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Entrar</Text>
             </View>

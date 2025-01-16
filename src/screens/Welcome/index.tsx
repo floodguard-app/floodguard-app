@@ -1,6 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useNavigation, NavigationProp } from '@react-navigation/native';
-import { StackParamList } from '../../routes/Stack.routes';
+import React, { useRef, useState } from 'react';
 import { Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
 import PagerView from 'react-native-pager-view';
 import logo from '../../../assets/images/logo.png';

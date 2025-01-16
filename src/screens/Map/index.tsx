@@ -7,7 +7,7 @@ import { HeaderButtons } from '../../components/HeaderButtons';
 
 export function Map({  navigation }: any) {
     const [location, setLocation] = useState(null);
-    const [errorMsg, setErrorMsg] = useState(null);
+    const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
     // Obtém a localização atual
     useEffect(() => {

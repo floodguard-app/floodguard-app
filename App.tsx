@@ -8,13 +8,11 @@ import { useEffect, useState } from 'react';
 
 import { Routes } from "./src/routes";
 import Welcome from './src/screens/Welcome';
-import { Credentials } from './src/screens/Login/Credentials';
+import { getUserId } from './src/services/users';
 
 export default function App() {
 
-  const [isFirstLaunch, setIsFirstLaunch] = useState<boolean | null>(false);
-
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isFirstLaunch, setIsFirstLaunch] = useState<boolean | null>(null);
 
   useEffect(() => {
 
@@ -29,7 +27,6 @@ export default function App() {
       }
     }
     checkFirstLaunch();
-
   }, [])
 
   if(isFirstLaunch === null) return null; // AppLoading

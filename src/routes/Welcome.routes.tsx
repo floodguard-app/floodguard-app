@@ -1,12 +1,11 @@
 import { createStackNavigator } from '@react-navigation/stack'
 
 // Import Screens
-import { Configs } from '../screens/Configs';
-import { WriteComment } from '../screens/WriteComment';
 
 const { Navigator, Screen } = createStackNavigator();
+import Welcome from '../screens/Welcome';
 
-export default function SecondaryRoutes() {
+export default function WelcomeRoutes() {
     return (
         <Navigator
             screenOptions={{
@@ -18,12 +17,8 @@ export default function SecondaryRoutes() {
             }}
         >
             <Screen 
-                name="Configurations Screen"
-                component={Configs}
-            />
-            <Screen 
-                name="Write Comment Screen"
-                component={WriteComment}
+                name="Welcome Screen"
+                component={Welcome}
             />
         </Navigator>
     )

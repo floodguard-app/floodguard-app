@@ -3,9 +3,10 @@ import { FlatList, View } from 'react-native';
 import { FloodAlert } from '../../components/FloodAlert';
 import { styles } from "./styles";
 import { HeaderButtons } from '../../components/HeaderButtons';
+import { FloodAlertObject } from '../../types/api';
 
 export function Home({ navigation }: any) {
-    const [floodAlertList, setFloodAlertList] = useState<Array<Object>>([
+    const [floodAlertList, setFloodAlertList] = useState<Array<FloodAlertObject>>([
         {
             riskMessage: "Alto risco de enchentes para amanhã nas seguintes regiões:",
             regions: [
@@ -20,7 +21,7 @@ export function Home({ navigation }: any) {
                 details: "A sua região pode sofrer alagamentos de 0,5 m em breve.",
                 link: "https://example.com",
             },
-            id: '1',
+            id: 1,
         },
     ]);
 
@@ -32,7 +33,7 @@ export function Home({ navigation }: any) {
             contentContainerStyle={{ alignItems: 'center', justifyContent: 'flex-start' }}
             data={floodAlertList}
             renderItem={({ item }) => <FloodAlert alert={item} />}
-            keyExtractor={item => item.id} 
+            keyExtractor={item => `alert-${item.id}`} 
         />
     </View>
   );

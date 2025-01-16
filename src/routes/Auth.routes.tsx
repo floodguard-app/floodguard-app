@@ -1,17 +1,12 @@
 import { createStackNavigator } from '@react-navigation/stack'
+import { AuthRoutesType } from '../types/routes';
 
 // Import Screens
 import { RegisterUser } from '../screens/RegisterUser';
 import { Credentials } from '../screens/Login/Credentials';
 import { RecoverPassword } from '../screens/Login/RecoverPassword';
 
-export type AuthRoutesParamList = {
-    'Register User Screen': { onComplete: () => void };
-    [key: string]: any; 
-};
-
-
-const { Navigator, Screen } = createStackNavigator<AuthRoutesParamList>();
+const { Navigator, Screen } = createStackNavigator<AuthRoutesType>();
 
 export default function AuthRoutes() {
     return (

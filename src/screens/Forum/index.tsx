@@ -5,10 +5,11 @@ import { styles } from './styles';
 import { HeaderButtons } from '../../components/HeaderButtons';
 import { ForumComment } from '../../components/ForumComment';
 import { WriteCommentButton } from '../../components/WriteCommentButton';
+import { CommentObject } from '../../types/api';
 
 export function Forum({ navigation }: any) {
 
-    const [forumMessages, setForumMessages] = useState<Array<any>>([
+    const [forumMessages, setForumMessages] = useState<Array<CommentObject>>([
         {
             'id': 1,
             'sender': 'bruno',
@@ -43,7 +44,7 @@ export function Forum({ navigation }: any) {
                 contentContainerStyle={{ alignItems: 'center', justifyContent: 'flex-start' }}
                 data={forumMessages}
                 renderItem={({ item }) => <ForumComment commentData={item} />}
-                keyExtractor={item => item.id} 
+                keyExtractor={item => `comment-${item.id}`} 
             />
             <WriteCommentButton navigation={navigation} />
         </View>

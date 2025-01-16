@@ -2,20 +2,9 @@ import React from 'react';
 import { Text, View } from 'react-native';
 
 import { styles } from './styles';
+import { FloodAlertObject } from '../../types/api';
 
-interface FloodAlertProps {
-    alert: {
-        riskMessage: String,
-        regions: Array<String>,
-        warning?: {
-            message: String,
-            details: String,
-            link: String,
-        },
-    }
-}
-
-export function FloodAlert({ alert }: FloodAlertProps) {
+export function FloodAlert({ alert }: { alert: FloodAlertObject }) {
     return (
         <View style={styles.container}>
             {/* Título */}
