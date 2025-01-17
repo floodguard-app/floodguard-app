@@ -8,11 +8,12 @@ import Welcome from '../screens/Welcome';
 export default function WelcomeRoutes() {
     return (
         <Navigator
+            initialRouteName='Welcome Screen'
             screenOptions={{
                 headerStyle: {
                     backgroundColor: '#f2f2f2',
                 },
-                headerShown: true,
+                headerShown: false,
                 title: '',
             }}
         >

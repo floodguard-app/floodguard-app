@@ -39,6 +39,10 @@ export function Credentials({ navigation }: any ) {
     const navToRecoverPassword = () => {
         navigation.navigate('Recover Password Screen');
     }
+
+    const navToRegisterUser = () => {
+        navigation.navigate('Register User Screen');
+    }
     
     return (
         <View style={styles.container}>
@@ -71,6 +75,11 @@ export function Credentials({ navigation }: any ) {
             <Text style={styles.forgotPassword}
                 onPress={navToRecoverPassword}
             >Esqueci minha senha</Text>
+            <View style={styles.registerArea}>
+                <Text style={styles.registerText}>Não possui uma conta? 
+                    <Text style={styles.registerLink} onPress={navToRegisterUser}> Cadastre-se!</Text>
+                </Text>
+            </View>
         </View>
     );
 }

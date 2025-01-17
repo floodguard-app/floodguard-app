@@ -6,6 +6,7 @@ import personalInfoIcon from '../../../assets/images/personalInfo.png';
 import alertConfigIcon from '../../../assets/images/bell.png';
 import reportIcon from '../../../assets/images/report.png';
 import talkToUsIcon from '../../../assets/images/talkToUs.png';
+import { deleteUserId } from '../../services/users';
 
 export function Configs({ navigation }: any) {
 
@@ -25,6 +26,11 @@ export function Configs({ navigation }: any) {
         );
     };    
 
+    const endSession = async () => {
+        await deleteUserId();
+        navToLogin();
+    } 
+
     const renderConfigItem = (icon:any, text:String, toPageName:String) => 
         <View style={styles.configItem} onTouchEnd={() => navigation.navigate('Configurations Tabs', {screen: toPageName})}>
             <View style={styles.configIconContainer}>
@@ -43,7 +49,7 @@ export function Configs({ navigation }: any) {
             <View style={styles.divider} />
             { renderConfigItem(talkToUsIcon, "Fale Conosco", 'Talk to Us Screen') }
             <Text style={styles.endSession}
-                onPress={navToLogin}
+                onPress={endSession}
             >Encerrar Sessão</Text>
         </View>
     );

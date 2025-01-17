@@ -11,6 +11,7 @@ const { Navigator, Screen } = createBottomTabNavigator()
 export default function MainRoutes() {
     return (
         <Navigator
+            initialRouteName='Home Screen'
             screenOptions={{
                 tabBarStyle: { 
                     backgroundColor: '#2d3142',

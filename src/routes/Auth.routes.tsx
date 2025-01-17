@@ -11,7 +11,7 @@ const { Navigator, Screen } = createStackNavigator<AuthRoutesType>();
 export default function AuthRoutes() {
     return (
         <Navigator
-            initialRouteName="Register User Screen"
+            initialRouteName="Login Screen"
             screenOptions={{
                 headerShown: false,
             }}

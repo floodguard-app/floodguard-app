@@ -1,17 +1,14 @@
 import React, { useRef, useState } from 'react';
 import { Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
 import PagerView from 'react-native-pager-view';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { CommonActions } from '@react-navigation/native';
 import logo from '../../../assets/images/logo.png';
 
 import { styles } from './styles';
 
-interface WelcomeScreenProps {
-    onComplete: () => void; 
-} 
+export default function Welcome({ navigation }: any) {
 
-export default function Welcome({ onComplete }: WelcomeScreenProps ) {
-
-    // const navigation = useNavigation<NavigationProp<StackParamList>>();
     const [currentScreen, setCurrentScreen] = useState(0);
     const pagerRef = useRef<PagerView>(null);
 
@@ -30,12 +27,29 @@ export default function Welcome({ onComplete }: WelcomeScreenProps ) {
         },
     ];
 
-    const nextScreen = () => {
+    const navToRegisterUser = () => {
+        navigation.dispatch(
+            CommonActions.reset({
+                index: 0,
+                routes: [
+                    {
+                        name: 'Authentication Tabs', // Nome do Navigator pai
+                        state: {
+                            routes: [{ name: 'Register User Screen' }], // Nome da tela no Navigator filho
+                        },
+                    },
+                ],
+            })
+        );
+    };    
+
+    const nextScreen = async () => {
         if(currentScreen < screens.length - 1) {
             pagerRef.current?.setPage(currentScreen + 1)
         } 
         else {
-            onComplete(); // Finaliza a tela de boas vindas
+            await AsyncStorage.setItem('hasLaunched', 'true');
+            navToRegisterUser();
         }
     };
 

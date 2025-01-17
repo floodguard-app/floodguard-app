@@ -90,5 +90,18 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
+    },
+    registerArea: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    registerText: {
+        fontSize: 14,
+    },
+    registerLink: {
+        textDecorationLine: 'underline',
+        fontWeight: '600',
+        color: '#6874E8',
     }
 });
