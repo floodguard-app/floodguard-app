@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, Text, TextInput, View, Alert } from 'react-native';
 import { CommonActions } from '@react-navigation/native';
 import logo from '../../../assets/images/logo.png';
@@ -14,13 +14,17 @@ export function Credentials({ navigation }: any ) {
         password: '',
     })
 
-    const navToHome = async () => {
+    const verifyLogin = async () => {
         const response = await loginUser(credentials.email, credentials.password);
         if(!response) {
             Alert.alert("Erro ao realizar login", "Email ou senha incorretos");
             return;
         }
 
+        navToHome();
+    };
+
+    const navToHome = () => {
         navigation.dispatch(
             CommonActions.reset({
                 index: 0,
@@ -34,7 +38,7 @@ export function Credentials({ navigation }: any ) {
                 ],
             })
         );
-    };
+    }
 
     const navToRecoverPassword = () => {
         navigation.navigate('Recover Password Screen');
@@ -43,6 +47,8 @@ export function Credentials({ navigation }: any ) {
     const navToRegisterUser = () => {
         navigation.navigate('Register User Screen');
     }
+
+    // useEffect(() => console.log('credentials: ', credentials), [credentials]);
     
     return (
         <View style={styles.container}>
@@ -68,7 +74,7 @@ export function Credentials({ navigation }: any ) {
                 </View>
             </View>
             <View style={styles.loginButton} 
-                onTouchEnd={ navToHome }
+                onTouchEnd={ verifyLogin }
             >
                 <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>Entrar</Text>
             </View>

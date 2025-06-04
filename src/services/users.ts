@@ -1,9 +1,11 @@
-import { getUserByEmail } from "../api/users";
+import { getUserByEmail, handleLogin } from "../api/users";
+import { useAuth } from '../contexts/AuthContext';
 
 import * as SecureStore from 'expo-secure-store';
 
-export const saveUserId = async (userId: number) => {
-    await SecureStore.setItemAsync('user_id', userId.toString());
+export const saveUserId = async (user: any | null) => {
+    if(user === null) return;
+    await SecureStore.setItemAsync('user_id', user.id.toString());
 };
 
 export const getUserId = async () => {
@@ -21,11 +23,13 @@ export const deleteUserId = async () => {
 };
 
 export default async function loginUser(email: string, password: string) {
-    const user = await getUserByEmail(email);
+    const response = await handleLogin(email, password);
+    
+    if (response) return false;
+    
+    const { user, setLoginData } = useAuth();
+    setLoginData(response);
 
-    if (!user) return false;    
-    if( user.password != password ) return false;
-
-    saveUserId(user.id);
+    saveUserId(user);
     return true;
 }
