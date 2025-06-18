@@ -3,10 +3,8 @@ import { styles } from "./styles"
 import { Text, TextInput } from "react-native"
 import { useState } from "react"
 
-export default function EmailInput({ navigation }: any) {
+export default function EmailInput({ navigation, email, setEmail }: any) {
     
-    const [userEmail, setUserEmail] = useState<string>('')
-
     const navToLogin = () => {
         navigation.navigate('Login Screen');
     }
@@ -17,8 +15,8 @@ export default function EmailInput({ navigation }: any) {
             <TextInput style={styles.emailInput}
                 keyboardType='email-address'
                 autoCapitalize='none'
-                value={userEmail}
-                onChangeText={setUserEmail}
+                value={email}
+                onChangeText={setEmail}
             />
             <Text style={styles.hasRegister}
                 onPress={navToLogin}

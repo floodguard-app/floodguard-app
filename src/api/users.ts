@@ -27,6 +27,17 @@ export async function getUserByEmail(email: string): Promise<UserObject | undefi
     }
 }
 
+export async function handleRegister(email: string, password: string): Promise<UserLoginObject | undefined> {
+    try {
+        const registeredUser = (await axios.post('http://10.0.2.2:1570/api/usuarios/comum/cadastro', {email, password})).data;
+        return registeredUser;
+    }
+    catch (error) {
+        console.error(error);
+        return;
+    }
+}
+
 export async function handleLogin(email: string, password: string): Promise<UserLoginObject | undefined> {
     try {
         const loginUser = (await axios.post('http://10.0.2.2:1570/api/usuarios/login', {email, password})).data;

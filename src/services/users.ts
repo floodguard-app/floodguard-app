@@ -1,4 +1,4 @@
-import { getUserByEmail, handleLogin } from "../api/users";
+import { getUserByEmail, handleLogin, handleRegister } from "../api/users";
 import { useAuth } from '../contexts/AuthContext';
 
 import * as SecureStore from 'expo-secure-store';
@@ -22,10 +22,17 @@ export const deleteUserId = async () => {
     }
 };
 
-export default async function loginUser(email: string, password: string) {
+export async function registerUser(email: string, password: string) {
+    const response = await handleRegister(email, password);
+
+    if (response) return response;
+    return undefined;
+}
+
+export async function loginUser(email: string, password: string) {
     const response = await handleLogin(email, password);
     
-    if (response) return false;
+    if (response) return response;
     
     const { user, setLoginData } = useAuth();
     setLoginData(response);

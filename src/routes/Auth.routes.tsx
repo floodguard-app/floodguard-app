@@ -19,7 +19,7 @@ export default function AuthRoutes() {
             <Screen 
                 name="Register User Screen"
                 component={RegisterUser}
-                initialParams={{ onComplete: () => {} }}
+                initialParams={{ onComplete: () => console.log("completed") }}
             />
 
             <Screen 

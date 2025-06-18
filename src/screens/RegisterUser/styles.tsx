@@ -58,5 +58,17 @@ export const styles = StyleSheet.create({
         textDecorationLine: 'underline',
         fontSize: 14,
         fontWeight: '900',
+    },
+    concludeRegister: {
+        position: 'absolute',
+        bottom: '8%',
+        alignSelf: 'center',
+        width: '100%',
+        paddingVertical: 20,
+        textAlign: 'center',
+        borderRadius: 5,
+        backgroundColor: '#5079F2',
+        color: 'white',
+        fontSize: 18,
     }
 });

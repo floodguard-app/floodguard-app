@@ -5,7 +5,7 @@ import logo from '../../../assets/images/logo.png';
 import emailIcon from '../../../assets/images/email.png';
 import paasswordIcon from '../../../assets/images/password.png';
 import { styles } from './styles';
-import loginUser from '../../services/users';
+import { loginUser } from '../../services/users';
 
 export function Credentials({ navigation }: any ) {
     
@@ -16,6 +16,7 @@ export function Credentials({ navigation }: any ) {
 
     const verifyLogin = async () => {
         const response = await loginUser(credentials.email, credentials.password);
+        console.log('login response: ', response);
         if(!response) {
             Alert.alert("Erro ao realizar login", "Email ou senha incorretos");
             return;

@@ -6,12 +6,14 @@ import { useState } from "react";
 
 interface PasswordInputProps {
     navigation: any,
+    password: string,
+    setPassword: (password: string) => void,
+    registerUser: any,
     onComplete: () => void,
 }
 
-export default function PasswordInput({ navigation, onComplete }: PasswordInputProps) {
+export default function PasswordInput({ navigation, password, setPassword, registerUser, onComplete }: PasswordInputProps) {
 
-    const [userPassword, setUserPassword] = useState<string>('')
     const [isSecure, setIsSecure] = useState(true);
 
     const navToLogin = () => {
@@ -25,8 +27,8 @@ export default function PasswordInput({ navigation, onComplete }: PasswordInputP
                 <TextInput style={styles.passwordInput}
                     keyboardType="default"
                     autoCapitalize="none"
-                    value={userPassword}
-                    onChangeText={setUserPassword}
+                    value={password}
+                    onChangeText={setPassword}
                     secureTextEntry={isSecure}
                 />
                 <Text style={styles.showPasswordButton}
@@ -39,6 +41,7 @@ export default function PasswordInput({ navigation, onComplete }: PasswordInputP
             <Text style={styles.hasRegister}
                 onPress={navToLogin}
             >Já tenho um cadastro</Text>
+            <Text style={styles.concludeRegister} onPress={registerUser}>Concluir cadastro</Text>
         </LinearGradient>
     )
 }
