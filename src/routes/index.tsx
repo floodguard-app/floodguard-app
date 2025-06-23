@@ -8,7 +8,7 @@ import MainRoutes from './Main.routes';
 import ConfigRoutes from './Config.routes';
 import SecondaryRoutes from './Secondary.routes';
 import AuthRoutes from './Auth.routes';
-import { getUserId } from '../services/users';
+import { getValidAuthToken } from '../services/users';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -18,28 +18,26 @@ export function Routes() {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
 
     useEffect(() => {
-        const checkFirstLaunch = async () => {
+        const checkAppStatus = async () => {
+            // Verifica se é o primeiro lançamento
             const hasLaunched = await AsyncStorage.getItem('hasLaunched');
-            if(hasLaunched === null) {
-                // Primeira vez abrindo o app
+            if (hasLaunched === null) {
                 setIsFirstLaunch(true);
-            }
-            else {
+            } else {
                 setIsFirstLaunch(false);
             }
-        }
-        checkFirstLaunch();
 
-        const checkIsLoggedIn = async () => {
-            const userId = await getUserId();
-            if(userId !== undefined) setIsLoggedIn(true);
-            else setIsLoggedIn(false);
-        }
-        checkIsLoggedIn();
+            // Verifica se o usuário tem um token de autenticação válido
+            const validToken = await getValidAuthToken();
+            setIsLoggedIn(validToken !== null);
+        };
 
+        checkAppStatus();
     }, []);
 
-    if(isFirstLaunch === null || isLoggedIn === null) return null; // AppLoading
+    if (isFirstLaunch === null || isLoggedIn === null) {
+        return null;
+    }
 
     return (
         <Navigator

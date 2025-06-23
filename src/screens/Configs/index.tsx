@@ -6,7 +6,7 @@ import personalInfoIcon from '../../../assets/images/personalInfo.png';
 import alertConfigIcon from '../../../assets/images/bell.png';
 import reportIcon from '../../../assets/images/report.png';
 import talkToUsIcon from '../../../assets/images/talkToUs.png';
-import { deleteUserId } from '../../services/users';
+import { logoutUser } from '../../services/users';
 
 export function Configs({ navigation }: any) {
 
@@ -27,7 +27,7 @@ export function Configs({ navigation }: any) {
     };    
 
     const endSession = async () => {
-        await deleteUserId();
+        await logoutUser();
         navToLogin();
     } 
 

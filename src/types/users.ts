@@ -5,14 +5,10 @@ export interface UserObject {
     idBairro?: string,
     password?: string,
     birthday?: string,
+    dataRegistro?: string
 }
 
 export interface UserLoginObject {
     token: string,
-    usuario: {
-        id: number, 
-        email: string, 
-        nomeUsuario: string
-        idBairro?: string, 
-    }
+    usuario: UserObject
 }

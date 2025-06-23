@@ -15,6 +15,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'flex-end',
         flexWrap: 'wrap',
+        // backgroundColor: 'red'
         
     },
     infoLabel: {
@@ -28,5 +29,23 @@ export const styles = StyleSheet.create({
         fontSize: 18,
         color: '#333',
         alignSelf: 'flex-end',
+        paddingRight: 30
+    },
+    editTouch: {
+        position: 'absolute',
+        right: 0,
+        bottom: 4
+    },
+    editIcon: {
+        width: 16,
+        height: 16,
+    },
+    editInput: {
+        alignSelf: 'flex-end',
+        flex: 1,
+        marginLeft: 20,
+        backgroundColor: 'white',
+        borderRadius: 10,
+        height: 'auto'
     }
 });
