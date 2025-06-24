@@ -8,7 +8,7 @@ import MainRoutes from './Main.routes';
 import ConfigRoutes from './Config.routes';
 import SecondaryRoutes from './Secondary.routes';
 import AuthRoutes from './Auth.routes';
-import { getValidAuthToken } from '../services/users';
+import { getValidAuthToken } from '../services/user';
 
 const { Navigator, Screen } = createStackNavigator();
 

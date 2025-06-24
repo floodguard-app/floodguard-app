@@ -1,8 +1,8 @@
 import * as SecureStore from 'expo-secure-store';
 import { jwtDecode } from 'jwt-decode';
 
-import { handleLogin, handleRegister } from "../api/users";
-import { UserObject } from "../types/users";
+import { handleBairroUpdate, handleLogin, handleRegister, handleUsernameUpdate } from "../api/user";
+import { UserObject } from "../types/user";
 
 export async function registerUser(email: string, password: string) {
     const response = await handleRegister(email, password);
@@ -81,4 +81,34 @@ export async function getValidAuthToken(): Promise<string | null> {
         await logoutUser(); // Desloga o usuário se o token estiver expirado
     }
     return null;
+}
+
+export async function updateUsername(newUsername: string): Promise<boolean | null> {
+    try {
+        const response = await handleUsernameUpdate(newUsername);
+        if(response?.status == 200) {
+            await SecureStore.setItemAsync('userData', JSON.stringify(response.data))
+            return true;
+        }
+        else {
+            return false;
+        }
+    } catch (error) {
+        return null;
+    }
+}
+
+export async function updateBairro(newBairroId: number): Promise<boolean | null> {
+    try {
+        const response = await handleBairroUpdate(newBairroId);
+        if(response?.status == 200) {
+            await SecureStore.setItemAsync('userData', JSON.stringify(response.data))
+            return true;
+        }
+        else {
+            return false;
+        }
+    } catch (error) {
+        return null;
+    }
 }

@@ -6,7 +6,7 @@ import personalInfoIcon from '../../../assets/images/personalInfo.png';
 import alertConfigIcon from '../../../assets/images/bell.png';
 import reportIcon from '../../../assets/images/report.png';
 import talkToUsIcon from '../../../assets/images/talkToUs.png';
-import { logoutUser } from '../../services/users';
+import { logoutUser } from '../../services/user';
 
 export function Configs({ navigation }: any) {
 

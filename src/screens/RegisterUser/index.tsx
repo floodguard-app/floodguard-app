@@ -4,7 +4,7 @@ import PagerView from "react-native-pager-view";
 import EmailInput from "./EmailInput"; // Importe o componente
 import PasswordInput from "./PasswordInput"; // Importe o componente
 import { styles } from "./styles";
-import { registerUser } from "../../services/users";
+import { registerUser } from "../../services/user";
 
 interface RegisterUserProps {
     navigation: any;

@@ -46,6 +46,26 @@ export const styles = StyleSheet.create({
         marginLeft: 20,
         backgroundColor: 'white',
         borderRadius: 10,
-        height: 'auto'
+        borderTopRightRadius: 0,
+        borderBottomRightRadius: 0,
+        height: '100%'
+    },
+    editButtons: {
+        overflow: 'hidden',
+        height: '100%'
+    },
+    editButton: {
+        flex: 1,
+        aspectRatio: 1,
+        textAlign: 'center',
+        verticalAlign: 'middle'
+    },
+    checkButton: {
+        backgroundColor: 'green',
+        borderTopRightRadius: 10
+    },
+    cancelButton: {
+        backgroundColor: 'darkred',
+        borderBottomRightRadius: 10
     }
 });

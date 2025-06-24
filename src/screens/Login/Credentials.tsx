@@ -5,7 +5,7 @@ import logo from '../../../assets/images/logo.png';
 import emailIcon from '../../../assets/images/email.png';
 import paasswordIcon from '../../../assets/images/password.png';
 import { styles } from './styles';
-import { loginUser } from '../../services/users';
+import { loginUser } from '../../services/user';
 
 export function Credentials({ navigation }: any ) {
     

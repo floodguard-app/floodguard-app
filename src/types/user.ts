@@ -2,9 +2,8 @@ export interface UserObject {
     id: number,
     email: string,
     nomeUsuario: string,
-    idBairro?: string,
+    idBairro?: number,
     password?: string,
-    birthday?: string,
     dataRegistro?: string
 }
 
