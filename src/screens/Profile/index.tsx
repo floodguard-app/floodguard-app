@@ -94,7 +94,7 @@ export function Profile() {
                         onValueChange={(itemValue) => setEditingField(prev => prev ? {...prev, value: itemValue} : null)}
                         style={styles.editInput} // use o mesmo estilo do TextInput se quiser
                     >
-                        <Picker.Item label="Selecione um bairro" value="" />
+                        <Picker.Item label="Selecione uma região" value="" />
                         {bairroList?.map(bairro => (
                             <Picker.Item label={bairro.nomeBairro} value={bairro.id.toString()} key={bairro.id} />
                         ))}

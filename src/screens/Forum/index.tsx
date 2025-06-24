@@ -1,25 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, FlatList } from 'react-native';
 import { styles } from './styles';
-import { getUserMessages } from '../../services/messages';
 import { HeaderButtons } from '../../components/HeaderButtons';
 import { ForumComment } from '../../components/ForumComment';
 import { WriteCommentButton } from '../../components/WriteCommentButton';
-import { CommentObject } from '../../types/api';
 
-import comments from '../../data/comments.json'
+import { ComentarioResponse } from '../../types/comentario';
+import { listComentarios } from '../../api/comentario';
 
 export function Forum({ navigation }: any) {
 
-    const [forumMessages, setForumMessages] = useState<Array<CommentObject>>(comments);    
+    const [forumMessages, setForumMessages] = useState<Array<ComentarioResponse> | undefined>();    
+
+    const getComentarios = async () => {
+        const data = await listComentarios();
+        setForumMessages(data.reverse())
+    }
 
     useEffect(() => {
-        const loadUserMessages = async () => {
-            const data = await getUserMessages();
-            setForumMessages(prev => [ ...prev, ...data ])
-        }
-        loadUserMessages()
-    }, [])
+        getComentarios();
+
+        const interval = setInterval(() => {
+            getComentarios();
+        }, 15000); // 15000ms = 15 segundos
+
+        return () => clearInterval(interval); // limpa quando o componente desmonta
+    }, []);
 
     return (
         <View style={styles.container}>

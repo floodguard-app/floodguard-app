@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
         borderRadius: 10,
         marginBottom: 25,
         padding: 20,
-        gap: 20,
+        gap: 10,
     },
     divisionBar: {
         height: 1,
@@ -24,9 +24,19 @@ export const styles = StyleSheet.create({
         fontSize: 16,
         color: "#333",
     },
-    datetime: {
-        textAlign: 'center',
-        color: "#333",
+    userInfo: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        gap: '8%',
+    },
+    username: {
+        fontWeight: '600',
         fontSize: 15,
+    },
+    datetime: {
+        color: "#333",
+        fontSize: 14,
+        verticalAlign: 'bottom'
     }
 });
