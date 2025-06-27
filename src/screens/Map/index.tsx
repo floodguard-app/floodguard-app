@@ -1,76 +1,114 @@
-import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, Text, ActivityIndicator } from 'react-native';
+import MapView, { Marker, Region } from 'react-native-maps';
 import * as Location from 'expo-location';
-import { styles } from './styles';
+
 import { HeaderButtons } from '../../components/HeaderButtons';
+import { styles as globalStyles } from './styles'; // Importando seus estilos existentes
 
-type LocationType = {
-    latitude: number;
-    longitude: number;
-    latitudeDelta: number;
-    longitudeDelta: number;
-};
-
-type LocationT = {
-    "coords": {
-        "accuracy": number, 
-        "altitude": number, 
-        "altitudeAccuracy": number, 
-        "heading": number, 
-        "latitude": number, 
-        "longitude": number, 
-        "speed": number
-    }, 
-    "mocked": boolean, 
-    "timestamp": number
-}
-
-export function Map({  navigation }: any) {
-    const [location, setLocation] = useState<LocationType | null>(null);
+export function Map({ navigation }: any) {
+    // Estado para armazenar a região atual do mapa
+    const [mapRegion, setMapRegion] = useState<Region | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-    // Obtém a localização atual
     useEffect(() => {
-        (async () => {
-            try {
-                let { status } = await Location.requestForegroundPermissionsAsync();
-                if (status !== 'granted') {
-                    setErrorMsg('Permissão para acessar localização foi negada.');
-                    return;
-                }
-                let currentLocation = await Location.getCurrentPositionAsync({});
-                console.log(currentLocation);
-                setLocation({
-                    latitude: -23.491835343235458, 
-                    longitude: -46.75947943031476,
-                    latitudeDelta: 0.0075,
-                    longitudeDelta: 0.0075,
-                });
-            } catch (error:any) {
-                setErrorMsg('Erro ao obter localização: ' + error.message);
-            }
-        })();
-    }, []);
-    
+        const getLocationAndSetMap = async () => {
+            setIsLoading(true);
+            setErrorMsg(null);
 
+            // 1. Pede permissão de localização
+            let { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== 'granted') {
+                setErrorMsg('Permissão de localização negada. O mapa não pode ser exibido.');
+                setIsLoading(false);
+                return;
+            }
+
+            try {
+                // 2. Obtém a localização atual do usuário
+                let location = await Location.getCurrentPositionAsync({});
+                const { latitude, longitude } = location.coords;
+
+                // 3. Define a região do mapa com base na localização do usuário
+                setMapRegion({
+                    latitude: latitude,
+                    longitude: longitude,
+                    latitudeDelta: 0.01,  // Delta controla o nível de zoom. Valores menores = mais zoom.
+                    longitudeDelta: 0.01,
+                });
+
+            } catch (error) {
+                console.error(error);
+                setErrorMsg('Não foi possível obter a sua localização.');
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        getLocationAndSetMap();
+    }, []); // Roda apenas uma vez quando o componente é montado
+
+    // Renderiza uma tela de carregamento ou erro enquanto a localização é obtida
+    if (isLoading || errorMsg) {
+        return (
+            <View style={styles.container}>
+                <HeaderButtons navigation={navigation} />
+                <View style={styles.centeredContent}>
+                    {isLoading ? (
+                        <>
+                            <ActivityIndicator size="large" color="#5e9ff2" />
+                            <Text style={styles.statusText}>Obtendo sua localização...</Text>
+                        </>
+                    ) : (
+                        <Text style={styles.statusText}>{errorMsg}</Text>
+                    )}
+                </View>
+            </View>
+        );
+    }
+    
     return (
-        <View style={styles.container}>
+        <View style={globalStyles.container}>
             <HeaderButtons navigation={navigation} />
-            {location ? (
-                <MapView
-                    style={styles.map}
-                    region={location}
-                >
+            <MapView
+                style={styles.map}
+                initialRegion={mapRegion!} // Usa a região obtida para inicializar o mapa. O '!' diz ao TypeScript que temos certeza que não é nulo aqui.
+                showsUserLocation={true}    // Opcional: mostra o ponto azul padrão do sistema para a localização do usuário
+                showsMyLocationButton={true} // Opcional: mostra um botão para recentralizar no usuário
+            >
+                {/* Adicionamos um marcador (pin) customizado na localização do usuário */}
+                {mapRegion && (
                     <Marker
-                        coordinate={location}
-                        title="Você está aqui"
-                        description="Esta é sua localização atual"
+                        coordinate={{
+                            latitude: mapRegion.latitude,
+                            longitude: mapRegion.longitude,
+                        }}
+                        title="Sua Localização"
+                        description="Você está aqui!"
                     />
-                </MapView>
-                ) : (
-                <Text>{errorMsg || 'Obtendo localização...'}</Text>
-            )}
+                )}
+            </MapView>
         </View>
     );
 }
+
+// Estilos locais para o componente
+const styles = StyleSheet.create({
+    map: {
+        ...StyleSheet.absoluteFillObject,
+        top: 80, // Ajuste para não ficar embaixo do HeaderButtons
+    },
+    container: {
+        flex: 1,
+    },
+    centeredContent: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    statusText: {
+        marginTop: 10,
+        fontSize: 16,
+    }
+});
